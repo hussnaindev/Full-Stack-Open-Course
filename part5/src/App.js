@@ -8,6 +8,12 @@ const App = () => {
   const [blogs,setBlogs] = useState([])
   const [user, setUser] = useState(null)
 
+  const handleLogout = () =>
+  {
+    window.localStorage.removeItem('user')
+    setUser(null)
+  }
+
   useEffect(() => {
           async function fetchAllBlogs()
           {
@@ -31,6 +37,12 @@ const App = () => {
           
   }, [user])
 
+  useEffect(()=>
+  {
+    console.log('second useEffect hook working')
+    setUser(JSON.parse(window.localStorage.getItem('user')))
+  },[])
+
 
 
   if(user===null)
@@ -44,7 +56,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <div>
-        {user.name} logged in
+        {user.name} logged in <button onClick={handleLogout}>logout</button>
       </div>
       {
         blogs.map(blog =>
