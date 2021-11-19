@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import Login from './components/Login'
+import NewBlog from './components/NewBlog'
 
 
 const App = () => {
@@ -41,6 +42,8 @@ const App = () => {
   {
     console.log('second useEffect hook working')
     setUser(JSON.parse(window.localStorage.getItem('user')))
+    
+    
   },[])
 
 
@@ -57,6 +60,7 @@ const App = () => {
       <h2>blogs</h2>
       <div>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
+        <NewBlog />
       </div>
       {
         blogs.map(blog =>
