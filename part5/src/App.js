@@ -9,10 +9,28 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-        const response = blogService.getAll()
-        console.log("my response",response)
-        setBlogs(response)
-  }, [])
+          async function fetchAllBlogs()
+          {
+            const response = await blogService.getAll()
+            console.log("my response",response)
+            setBlogs(response)
+          }
+
+          async function fetchUserBlogs()
+          {
+            console.log(user.id)
+            const response = await blogService.getBlogsByUser(user.id)
+            console.log("my response",response)
+            setBlogs(response)
+          }
+
+          if(user!==null)
+          {
+            fetchUserBlogs()
+          }
+          
+  }, [user])
+
 
 
   if(user===null)
@@ -25,7 +43,12 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {console.log()
+      <div>
+        {user.name} logged in
+      </div>
+      {
+        blogs.map(blog =>
+          <Blog key={blog.id} blog={blog}/>)
       }
      
     </div>

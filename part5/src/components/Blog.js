@@ -2,9 +2,10 @@ import React from 'react'
 const Blog = ({blog}) => {
   console.log(blog)
   return(
-    <div>
-       {blog.title} {blog.author}
-  </div>  
+    
+      <div>
+        {blog.title} {blog.author}
+      </div>
   )
 }
 
