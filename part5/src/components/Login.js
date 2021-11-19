@@ -26,6 +26,7 @@ const Login = ({user,setUser}) =>
         const credentials = {username,password}
         const response = await login.loginService(credentials)
         console.log(response.data)
+        window.localStorage.setItem('user',JSON.stringify(response.data))
         setUser(response.data)
     }
 
