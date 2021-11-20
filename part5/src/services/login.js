@@ -13,6 +13,7 @@ const loginService = async (credentials) =>
     catch(error)
     {
         console.log("error is",error.message)
+        return error
     }
    
 }
