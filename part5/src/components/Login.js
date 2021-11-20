@@ -41,7 +41,6 @@ const Login = ({user,setUser,errorMessage,setErrorMessage,successMessage,setSucc
         }
         else
         {
-            console.log('wrong cred')
             setErrorMessage('Wrong Credentials')
             setTimeout(()=>setErrorMessage(null),5000)
         }   

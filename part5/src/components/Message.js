@@ -5,7 +5,7 @@ const Message = ({errorMessage,successMessage}) =>
     if(errorMessage)
     {
         return(
-            <div>
+            <div className="errorMessage">
                 <h2>{errorMessage}</h2>
             </div>
         )
@@ -14,7 +14,7 @@ const Message = ({errorMessage,successMessage}) =>
     else if(successMessage)
     {
         return(
-            <div>
+            <div className="successMessage">
                 <h2>{successMessage}</h2>
             </div>
         )

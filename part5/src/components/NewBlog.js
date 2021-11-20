@@ -2,7 +2,7 @@ import react,{useState} from "react";
 import blogService from "../services/blogs";
 
 
-const NewBlog = ({user}) =>
+const NewBlog = () =>
 {
     const [title,setTitle] = useState('')
     const [author,setAuthor] = useState('')
@@ -30,7 +30,7 @@ const NewBlog = ({user}) =>
     const handleNewBlog = async (event) =>
     {
         event.preventDefault()
-        const blog = {title,author,url,user}
+        const blog = {title,author,url}
         console.log(blog)
         await blogService.createBlog(blog)
     }

@@ -37,8 +37,6 @@ const getBlogsByUser = async(id) =>
   {
   
     console.log("error is",error.message)
-    return error.message
-
   }
 }
 
