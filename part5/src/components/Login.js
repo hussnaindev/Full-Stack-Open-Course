@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react/cjs/react.development";
 import blogService from "../services/blogs";
 import login from "../services/login";
+import Message from "./Message";
 
-const Login = ({user,setUser}) =>
+const Login = ({user,setUser,errorMessage,setErrorMessage,successMessage,setSuccessMessage}) =>
 {
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
@@ -26,15 +27,32 @@ const Login = ({user,setUser}) =>
         event.preventDefault()
         const credentials = {username,password}
         const response = await login.loginService(credentials)
-        console.log(response.data)
-        blogService.setToken(response.data.token)
-        window.localStorage.setItem('user',JSON.stringify(response.data))
-        setUser(response.data)
+        console.log(response)
+        console.log('response status is',response.status)
+       
+        if(response.status === 200)
+        {
+                console.log(response.data)
+                blogService.setToken(response.data.token)
+                window.localStorage.setItem('user',JSON.stringify(response.data))
+                setUser(response.data)
+                setSuccessMessage('Login Successfully')
+                setTimeout(()=>setSuccessMessage(null),5000)
+        }
+        else
+        {
+            console.log('wrong cred')
+            setErrorMessage('Wrong Credentials')
+            setTimeout(()=>setErrorMessage(null),5000)
+        }   
+       
+       
     }
 
     return(
         <div>
             <h1>login to application</h1>
+            <Message errorMessage={errorMessage} successMessage={successMessage}/>
             <form onSubmit={handleLogin}>
                 <div className="username">
                     <label>Username</label>

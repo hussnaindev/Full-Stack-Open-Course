@@ -12,7 +12,8 @@ const loginService = async (credentials) =>
 
     catch(error)
     {
-        console.log("error is",error.message)
+        console.log("error is",error)
+        return error
     }
    
 }

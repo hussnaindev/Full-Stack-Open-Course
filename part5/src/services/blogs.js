@@ -35,7 +35,9 @@ const getBlogsByUser = async(id) =>
 
   catch(error)
   {
+  
     console.log("error is",error.message)
+    return error.message
 
   }
 }
