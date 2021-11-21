@@ -36,6 +36,7 @@ const App = () => {
 
           if(user!==null)
           {
+            blogService.setToken(user.token)
             fetchUserBlogs()
           }
           

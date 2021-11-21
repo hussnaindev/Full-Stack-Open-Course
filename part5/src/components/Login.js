@@ -33,7 +33,6 @@ const Login = ({user,setUser,errorMessage,setErrorMessage,successMessage,setSucc
         if(response.status === 200)
         {
                 console.log(response.data)
-                blogService.setToken(response.data.token)
                 window.localStorage.setItem('user',JSON.stringify(response.data))
                 setUser(response.data)
                 setSuccessMessage('Login Successfully')
