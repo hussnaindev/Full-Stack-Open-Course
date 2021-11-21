@@ -11,7 +11,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [errorMessage,setErrorMessage] = useState(null)
   const [successMessage,setSuccessMessage] = useState(null)
-  
 
   const handleLogout = () =>
   {
@@ -53,7 +52,7 @@ const App = () => {
   if(user===null)
   {
     return(
-      <Login user={user} setUser={setUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>
+      <Login user={user} setUser={setUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage} />
     )
   }
 

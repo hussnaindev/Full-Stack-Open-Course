@@ -7,6 +7,12 @@ const NewBlog = () =>
     const [title,setTitle] = useState('')
     const [author,setAuthor] = useState('')
     const [url,setURL] = useState('')
+    const [BlogFormVisible,setBlogFormVisible] = useState(false)
+
+    const hideWhenVisible = {display: BlogFormVisible ? 'none':''}
+    const showWhenVisible = {display: BlogFormVisible ? '':'none'}
+
+    const toggleVisibilty = () => setBlogFormVisible(!BlogFormVisible)
 
     const handleTitle = (event) =>
     {
@@ -36,30 +42,42 @@ const NewBlog = () =>
     }
 
     return(
+
+        <>
+
         <div>
-        <h1>create new</h1>
-        <form onSubmit={handleNewBlog}>
-            <div>
-                <label>title:</label>
-                <input type="text" value={title} onChange={handleTitle}></input>
-            </div>
+            <button style={hideWhenVisible} onClick={toggleVisibilty}>Create New Blog</button>
+        </div>
 
-            <div>
-                <label>author:</label>
-                <input type="text" value={author} onChange={handleAuthor}></input>
-            </div>
+        <div style={showWhenVisible}>
+                <h1>create new</h1>
+                <form onSubmit={handleNewBlog}>
+                    <div>
+                        <label>title:</label>
+                        <input type="text" value={title} onChange={handleTitle}></input>
+                    </div>
 
-            <div>
-                <label>url</label>
-                <input type="text" value={url} onChange={handleURL}></input>
-            </div>
+                    <div>
+                        <label>author:</label>
+                        <input type="text" value={author} onChange={handleAuthor}></input>
+                    </div>
 
-            <div>
-                <button type="submit">create</button>
+                    <div>
+                        <label>url</label>
+                        <input type="text" value={url} onChange={handleURL}></input>
+                    </div>
+
+                    <div>
+                        <button type="submit">create</button>
+                    </div>
+
+                </form>
             </div>
             
-        </form>
-        </div>
+            <div>
+                <button style={showWhenVisible} onClick={toggleVisibilty}>cancel</button>
+            </div>
+            </>
     )
 }
 
