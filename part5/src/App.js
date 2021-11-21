@@ -11,7 +11,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [errorMessage,setErrorMessage] = useState(null)
   const [successMessage,setSuccessMessage] = useState(null)
-  
 
   const handleLogout = () =>
   {
@@ -32,11 +31,13 @@ const App = () => {
             console.log(user.id)
             const response = await blogService.getBlogsByUser(user.id)
             console.log("my response",response)
+            response.sort(function(a,b){return a.likes - b.likes})
             setBlogs(response)
           }
 
           if(user!==null)
           {
+            blogService.setToken(user.token)
             fetchUserBlogs()
           }
           
@@ -53,7 +54,7 @@ const App = () => {
   if(user===null)
   {
     return(
-      <Login user={user} setUser={setUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage}/>
+      <Login user={user} setUser={setUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage} />
     )
   }
 
