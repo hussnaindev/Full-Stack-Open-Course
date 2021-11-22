@@ -31,7 +31,7 @@ const App = () => {
             console.log(user.id)
             const response = await blogService.getBlogsByUser(user.id)
             console.log("my response",response)
-            response.sort(function(a,b){return a.likes - b.likes})
+            response.sort(function(a,b){return b.likes - a.likes})
             setBlogs(response)
           }
 
