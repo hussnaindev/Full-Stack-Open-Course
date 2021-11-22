@@ -18,23 +18,23 @@ const App = () => {
     setUser(null)
   }
 
+  const fetchAllBlogs = async() =>
+  {
+    const response = await blogService.getAll()
+    console.log("my response",response)
+    setBlogs(response)
+  }
+
+  const fetchUserBlogs = async() =>
+  {
+    const response = await blogService.getBlogsByUser(user.id)
+    console.log("my response",response)
+    response.sort(function(a,b){return b.likes - a.likes})
+    setBlogs(response)
+  }
+
   useEffect(() => {
-          async function fetchAllBlogs()
-          {
-            const response = await blogService.getAll()
-            console.log("my response",response)
-            setBlogs(response)
-          }
-
-          async function fetchUserBlogs()
-          {
-            console.log(user.id)
-            const response = await blogService.getBlogsByUser(user.id)
-            console.log("my response",response)
-            response.sort(function(a,b){return b.likes - a.likes})
-            setBlogs(response)
-          }
-
+        
           if(user!==null)
           {
             blogService.setToken(user.token)
@@ -68,7 +68,7 @@ const App = () => {
       </div>
       {
         blogs.map(blog =>
-          <Blog key={blog.id} blog={blog}/>)
+          <Blog key={blog.id} blog={blog} fetchUserBlogs={fetchUserBlogs}/>)
       }
      
     </div>
