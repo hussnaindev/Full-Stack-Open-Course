@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
-const Blog = ({blog}) => {
+const Blog = ({blog,fetchUserBlogs}) => {
 
   const [blogInfoVisible,setBlogInfoVisible] = useState(false)
   const [likes,setLikes] = useState(blog.likes)
@@ -10,6 +10,17 @@ const Blog = ({blog}) => {
 
   const buttonText = {value: blogInfoVisible ? 'hide':'view'}
 
+  const handleRemove = async (blogId) =>
+  {
+    const response  = await blogService.deleteBlog(blogId)
+    console.log(response)
+    if(response.status === 204)
+    {
+      fetchUserBlogs()
+    }
+    
+  }
+
   const handleLikes = async (blog) =>
   {
     const updatedBlog = {
@@ -18,6 +29,7 @@ const Blog = ({blog}) => {
       url: blog.url,
       likes: (likes+1)
     }
+
     const response = await blogService.updateBlog(updatedBlog,blog.id)
     
     console.log(response.data)
@@ -51,7 +63,7 @@ const Blog = ({blog}) => {
             {console.log('likes',likes)}
             <span>{likes} <button onClick={() => handleLikes(blog)}>likes</button></span>
             <p>{blog.user.name}</p>
-           
+            <button onClick={() => handleRemove(blog.id)}>remove</button>
         </div>
         
       </div>
