@@ -12,13 +12,16 @@ const Blog = ({blog,fetchUserBlogs}) => {
 
   const handleRemove = async (blogId) =>
   {
-    const response  = await blogService.deleteBlog(blogId)
-    console.log(response)
-    if(response.status === 204)
+    const remove = window.confirm(`Remove blog ${blog.title} by ${blog.author}`)
+    if(remove === true)
     {
-      fetchUserBlogs()
+      const response  = await blogService.deleteBlog(blogId)
+      console.log(response)
+      if(response.status === 204)
+      {
+        fetchUserBlogs()
+      }
     }
-    
   }
 
   const handleLikes = async (blog) =>
