@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 
 const Button = (props) =>
 {
@@ -17,8 +18,16 @@ const StatisticLine = (props) =>
 
 }
 
-const Statistics = ({good,neutral,bad}) =>
+const Statistics = () =>
 {
+
+  const good = useSelector(state => state.good)
+  const bad = useSelector(state => state.bad)
+  const neutral = useSelector(state => state.neutral)
+
+  console.log(good)
+  console.log(bad)
+  console.log(neutral)
   const all = good+neutral+bad
   const average = (good*1 + neutral*0 + bad*(-1))/all
   const positive = (good/all)*100
@@ -74,19 +83,27 @@ const Statistics = ({good,neutral,bad}) =>
   )
 }
 
+
+
+
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  // save clicks of each button to its own state  
+   
+  const dispatch = useDispatch()
+
+  const countHandler = (feedback) =>
+  {
+    console.log('feedback is',feedback)
+    dispatch({type: feedback}) 
+  }
 
   return (
     <div>
       <h1>give feedback</h1>
-      <Button text="good" onClick={()=>setGood(good+1)}></Button>
-      <Button text="neutral" onClick={()=>setNeutral(neutral+1)}></Button>
-      <Button text="bad" onClick={()=>setBad(bad+1)}></Button>
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <Button text="good" onClick={() => countHandler('GOOD')}></Button>
+      <Button text="neutral" onClick={()=> countHandler('NEUTRAL')}></Button>
+      <Button text="bad" onClick={() => countHandler('BAD')}></Button>
+      <Statistics/>
     </div>
   )
 }
