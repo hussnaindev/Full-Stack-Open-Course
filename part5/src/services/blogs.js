@@ -19,7 +19,7 @@ const getAll = async() => {
 
   catch(error)
   {
-    console.log("error is",error.message)
+    console.log('error is',error.message)
   }
 
 }
@@ -35,8 +35,8 @@ const getBlogsByUser = async(id) =>
 
   catch(error)
   {
-  
-    console.log("error is",error.message)
+
+    console.log('error is',error.message)
   }
 }
 
@@ -100,6 +100,6 @@ const deleteBlog = async (blogId) =>
 
 }
 
-const blogService = { getAll, getBlogsByUser, createBlog,updateBlog,deleteBlog, setToken}
+const blogService = { getAll, getBlogsByUser, createBlog,updateBlog,deleteBlog, setToken }
 
 export default blogService
